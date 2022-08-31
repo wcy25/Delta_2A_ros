@@ -1,0 +1,12 @@
+<launch>
+	<node pkg="tf" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0 0 0 0  /base_footprint /base_link 50" />
+	<node pkg="tf" type="static_transform_publisher" name="base_footprint_to_laser" args="0 0 0 1.57 0 0  /base_footprint /laser 50" />
+	<node pkg="tf" type="static_transform_publisher" name="base_footprint_to_imu_link" args="0 0 0 0 0 0  /base_footprint /imu_link 50" />
+  <include file="$(find imu_com)/launch/init.launch" />
+  
+
+  <node name="delta_lidar"    pkg="delta_lidar"  type="delta_lidar_node" output="screen">
+  <param name="serial_port"         type="string" value="/dev/lider"/>
+  <param name="frame_id"            type="string" value="laser"/>
+  </node>
+</launch>
